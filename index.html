@@ -218,6 +218,41 @@ footer a:hover{color:var(--muted)}
   .credits-row .cr-role,.credits-row .cr-link{grid-column:2}
   .stats-row{flex-wrap:wrap}.stat-cell{min-width:50%;border-bottom:1px solid var(--border)}
 }
+
+/* ───── SOCIAL: VOTES & COMMENTS ───── */
+.script-meta{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.15rem;border-top:1px solid var(--border);background:rgba(0,0,0,.2);flex-wrap:wrap}
+.vote-btn{display:inline-flex;align-items:center;gap:.32rem;background:var(--glass);border:1px solid var(--border2);color:var(--muted);font-family:inherit;font-size:.74rem;font-weight:500;padding:.35rem .7rem;border-radius:100px;cursor:pointer;transition:all .15s}
+.vote-btn:hover{color:var(--text);background:var(--glass2)}
+.vote-btn.active-up{color:#22c55e;border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.12)}
+.vote-btn.active-down{color:#f87171;border-color:rgba(248,113,113,.45);background:rgba(248,113,113,.12)}
+.vote-btn svg{width:13px;height:13px}
+.helpful-lbl{margin-left:auto;font-size:.72rem;color:var(--muted2)}
+.comments{padding:1rem 1.15rem 1.25rem;border-top:1px solid var(--border);background:rgba(0,0,0,.18)}
+.comments-title{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.9rem;display:flex;align-items:center;gap:.45rem}
+.comments-title svg{color:var(--muted)}
+.comment-form{display:flex;gap:.5rem;margin-bottom:1rem;align-items:flex-end}
+.comment-form textarea{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:8px;padding:.6rem .85rem;font-family:inherit;font-size:.83rem;color:var(--text);resize:vertical;min-height:42px;max-height:160px;outline:none;transition:border-color .15s}
+.comment-form textarea:focus{border-color:var(--purple)}
+.comment-form button.post-btn{padding:.55rem 1.05rem;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;color:#fff;font-family:inherit;font-size:.78rem;font-weight:600;border-radius:8px;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.comment-form button.post-btn:hover{opacity:.88}
+.login-prompt{flex:1;text-align:center;padding:.9rem;background:var(--glass);border:1px dashed var(--border2);border-radius:8px;font-size:.82rem;color:var(--muted)}
+.login-prompt a{color:var(--purple);font-weight:600;cursor:pointer;text-decoration:none}
+.login-prompt a:hover{text-decoration:underline}
+.comment-list{display:flex;flex-direction:column;gap:.65rem}
+.comment{display:flex;gap:.7rem;padding:.75rem .85rem;background:var(--glass);border:1px solid var(--border);border-radius:10px;transition:border-color .15s}
+.comment:hover{border-color:var(--border2)}
+.c-avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#fff;overflow:hidden}
+.c-avatar img{width:100%;height:100%;object-fit:cover}
+.c-body{flex:1;min-width:0}
+.c-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.15rem}
+.c-name{font-size:.82rem;font-weight:600;color:#fff}
+.c-time{font-size:.68rem;color:var(--muted2)}
+.c-text{font-size:.83rem;color:#cfcfcf;line-height:1.5;word-wrap:break-word;overflow-wrap:break-word;white-space:pre-wrap}
+.c-actions{display:flex;align-items:center;gap:.4rem;margin-top:.5rem}
+.c-del{margin-left:auto;background:none;border:none;color:var(--muted2);font-family:inherit;font-size:.7rem;cursor:pointer;transition:color .15s;padding:.2rem .4rem}
+.c-del:hover{color:#f87171}
+.no-comments{text-align:center;padding:1.1rem;font-size:.78rem;color:var(--muted2)}
+
 </style>
 </head>
 <body>
@@ -435,6 +470,25 @@ footer a:hover{color:var(--muted)}
 <span class="cmt">-- Works on any executor | Always undetected</span>
 <span class="fn">loadstring</span>(<span class="fn">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://pastefy.app/cydtv23K/raw"</span>))()</code>
     </div>
+    <div class="script-meta">
+      <button class="vote-btn" data-vote="up" onclick="voteScript('hub','up')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H7"/></svg>
+        <span data-count="up">0</span>
+      </button>
+      <button class="vote-btn" data-vote="down" onclick="voteScript('hub','down')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H17"/></svg>
+        <span data-count="down">0</span>
+      </button>
+      <span class="helpful-lbl">Was this script helpful?</span>
+    </div>
+    <div class="comments" data-script="hub">
+      <div class="comments-title">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Comments <span id="commentCount-hub" style="color:var(--muted2);font-weight:400;margin-left:.2rem">(0)</span>
+      </div>
+      <div class="comment-form" id="commentForm-hub"></div>
+      <div class="comment-list" id="commentList-hub"></div>
+    </div>
   </div>
 </div>
 
@@ -573,6 +627,7 @@ function logout() {
   closeUserMenu();
   document.getElementById('userChip').style.display = 'none';
   document.getElementById('authBtns').style.display = 'flex';
+  if (typeof refreshSocial === 'function') refreshSocial();
   showToast('Logged out.');
 }
 
@@ -597,6 +652,7 @@ function renderUserChip(username) {
     wrap.style.background = acc.avatarColor || '#a855f7';
     wrap.innerHTML = '<span>' + display[0].toUpperCase() + '</span>';
   }
+  if (typeof refreshSocial === 'function') refreshSocial();
 }
 
 function toggleUserMenu(e) {
@@ -741,10 +797,166 @@ const obs = new IntersectionObserver(entries => {
 }, {threshold:.07});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
+
+// ─── VOTES & COMMENTS ────────────────────────────────────────────────
+const VOTES_KEY = 'g2p_votes';
+const COMMENTS_KEY = 'g2p_comments';
+const SCRIPT_IDS = ['hub'];
+
+const getVotes = () => JSON.parse(localStorage.getItem(VOTES_KEY) || '{}');
+const saveVotes = v => localStorage.setItem(VOTES_KEY, JSON.stringify(v));
+const getComments = () => JSON.parse(localStorage.getItem(COMMENTS_KEY) || '{}');
+const saveComments = c => localStorage.setItem(COMMENTS_KEY, JSON.stringify(c));
+
+function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function timeAgo(ts){
+  const s = Math.floor((Date.now()-ts)/1000);
+  if(s<60) return 'just now';
+  if(s<3600) return Math.floor(s/60)+'m ago';
+  if(s<86400) return Math.floor(s/3600)+'h ago';
+  if(s<2592000) return Math.floor(s/86400)+'d ago';
+  return new Date(ts).toLocaleDateString();
+}
+
+function avatarHTML(username){
+  const acc = getAccounts()[username] || {};
+  const display = acc.displayName || username || '?';
+  const init = display[0].toUpperCase();
+  if(acc.avatarImg) return '<div class="c-avatar"><img src="'+acc.avatarImg+'" alt=""></div>';
+  return '<div class="c-avatar" style="background:'+(acc.avatarColor||'#a855f7')+'">'+escapeHTML(init)+'</div>';
+}
+
+function voteScript(id, dir){
+  const user = getSession();
+  if(!user){ openAuth('login'); showToast('Log in to vote'); return; }
+  const all = getVotes();
+  if(!all[id]) all[id] = {up:0,down:0,by:{}};
+  const v = all[id];
+  const prev = v.by[user];
+  if(prev === dir){ v[dir]=Math.max(0,(v[dir]||0)-1); delete v.by[user]; }
+  else { if(prev){ v[prev]=Math.max(0,(v[prev]||0)-1); } v[dir]=(v[dir]||0)+1; v.by[user]=dir; }
+  saveVotes(all);
+  renderScriptVotes(id);
+}
+
+function renderScriptVotes(id){
+  const v = getVotes()[id] || {up:0,down:0,by:{}};
+  const user = getSession();
+  document.querySelectorAll('.comments[data-script="'+id+'"]').forEach(()=>{});
+  const meta = document.querySelector('.script-meta');
+  if(!meta) return;
+  meta.querySelectorAll('[data-vote]').forEach(btn=>{
+    const dir = btn.dataset.vote;
+    const count = btn.querySelector('[data-count]');
+    if(count) count.textContent = v[dir]||0;
+    btn.classList.toggle('active-up', dir==='up' && v.by[user]==='up');
+    btn.classList.toggle('active-down', dir==='down' && v.by[user]==='down');
+  });
+}
+
+function renderCommentForm(id){
+  const user = getSession();
+  const form = document.getElementById('commentForm-'+id);
+  if(!form) return;
+  if(!user){
+    form.innerHTML = '<div class="login-prompt"><a onclick="openAuth(\'login\')">Log in</a> or <a onclick="openAuth(\'signup\')">create an account</a> to post a comment.</div>';
+  } else {
+    form.innerHTML =
+      '<textarea id="commentInput-'+id+'" placeholder="Share your thoughts..." maxlength="500"></textarea>' +
+      '<button class="post-btn" onclick="postComment(\''+id+'\')">Post</button>';
+  }
+}
+
+function postComment(id){
+  const user = getSession();
+  if(!user){ openAuth('login'); return; }
+  const ta = document.getElementById('commentInput-'+id);
+  if(!ta) return;
+  const text = ta.value.trim();
+  if(!text){ showToast('Write something first'); return; }
+  if(text.length > 500){ showToast('Max 500 characters'); return; }
+  const all = getComments();
+  if(!all[id]) all[id] = [];
+  all[id].unshift({
+    id: Date.now().toString(36)+Math.random().toString(36).slice(2,7),
+    user, text, ts: Date.now(),
+    votes: {up:0,down:0,by:{}}
+  });
+  saveComments(all);
+  ta.value = '';
+  renderComments(id);
+  showToast('Comment posted ✨');
+}
+
+function deleteComment(id, cid){
+  const user = getSession(); if(!user) return;
+  if(!confirm('Delete this comment?')) return;
+  const all = getComments();
+  all[id] = (all[id]||[]).filter(c => !(c.id===cid && c.user===user));
+  saveComments(all);
+  renderComments(id);
+}
+
+function voteComment(id, cid, dir){
+  const user = getSession();
+  if(!user){ openAuth('login'); showToast('Log in to vote'); return; }
+  const all = getComments();
+  const c = (all[id]||[]).find(x=>x.id===cid); if(!c) return;
+  if(!c.votes) c.votes = {up:0,down:0,by:{}};
+  const prev = c.votes.by[user];
+  if(prev===dir){ c.votes[dir]=Math.max(0,(c.votes[dir]||0)-1); delete c.votes.by[user]; }
+  else { if(prev) c.votes[prev]=Math.max(0,(c.votes[prev]||0)-1); c.votes[dir]=(c.votes[dir]||0)+1; c.votes.by[user]=dir; }
+  saveComments(all);
+  renderComments(id);
+}
+
+function renderComments(id){
+  const list = document.getElementById('commentList-'+id);
+  const countEl = document.getElementById('commentCount-'+id);
+  if(!list) return;
+  const all = getComments()[id] || [];
+  const user = getSession();
+  if(countEl) countEl.textContent = '('+all.length+')';
+  if(!all.length){ list.innerHTML = '<div class="no-comments">No comments yet — be the first to share!</div>'; return; }
+  list.innerHTML = all.map(c=>{
+    const v = c.votes || {up:0,down:0,by:{}};
+    const accDisplay = (getAccounts()[c.user] && getAccounts()[c.user].displayName) || c.user;
+    const mine = c.user === user;
+    return '<div class="comment">' +
+      avatarHTML(c.user) +
+      '<div class="c-body">' +
+        '<div class="c-head"><span class="c-name">'+escapeHTML(accDisplay)+'</span><span class="c-time">'+timeAgo(c.ts)+'</span></div>' +
+        '<div class="c-text">'+escapeHTML(c.text)+'</div>' +
+        '<div class="c-actions">' +
+          '<button class="vote-btn '+(v.by[user]==='up'?'active-up':'')+'" onclick="voteComment(\''+id+'\',\''+c.id+'\',\'up\')">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H7"/></svg>' +
+            (v.up||0) +
+          '</button>' +
+          '<button class="vote-btn '+(v.by[user]==='down'?'active-down':'')+'" onclick="voteComment(\''+id+'\',\''+c.id+'\',\'down\')">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H17"/></svg>' +
+            (v.down||0) +
+          '</button>' +
+          (mine ? '<button class="c-del" onclick="deleteComment(\''+id+'\',\''+c.id+'\')">Delete</button>' : '') +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function refreshSocial(){
+  SCRIPT_IDS.forEach(id => {
+    renderScriptVotes(id);
+    renderCommentForm(id);
+    renderComments(id);
+  });
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────
 (function() {
   const s = getSession();
   if (s && getAccounts()[s]) renderUserChip(s);
+  refreshSocial();
 })();
 </script>
 </body>
